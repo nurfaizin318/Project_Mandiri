@@ -12,8 +12,7 @@ body{
 }
 .head ul li {
     list-style: none;
-    display: inline-block;
-    float: right;
+    float: left;
     font-size: 20px;
     padding:10px;
     
