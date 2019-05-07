@@ -16,7 +16,7 @@
         <li><a href="/mandiri/page/pelanggan.php">pelanggan</a></li>
         <li><a href="/mandiri/page/mo-bil.php">mobil</a></li>
         <li><a href="/mandiri/page/pengembalian.php">pengembalian</a></li>
-      
+        <li style="float: left">Rental-Mobil</li>      
      </ul>
   </div>
     

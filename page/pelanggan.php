@@ -14,13 +14,16 @@
         <li><a href="/mandiri/page/pelanggan.php">pelanggan</a></li>
         <li><a href="/mandiri/page/mo-bil.php">mobil</a></li>
         <li><a href="/mandiri/page/pengembalian.php">pengembalian</a></li>
-      
+        <li style="float: left">Rental-Mobil</li>      
      </ul>
   </div>
    <div class="header" >
        <h1 style="margin-left: 50%;color: #78909C">
            Penyewa
        </h1>
+   </div>
+   <div class="">
+       
    </div>
 </body>
 </html>
