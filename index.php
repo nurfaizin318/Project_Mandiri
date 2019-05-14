@@ -16,7 +16,7 @@
     width: 100%;
     height:50px;
     background-color: white;
-    box-shadow: 0 5px 10px rgba(207,216,220 ,0.6);
+    box-shadow: 0 5px 10px rgba(207,216,220 ,0.2);
     line-height: 20px;
 
     
@@ -25,8 +25,21 @@
     list-style: none;
     font-size: 20px;
     padding:10px;   
-    display:inline-block;
     float:right;
+}
+.head ul li:hover .drop a{
+    display:block;
+}
+.drop{
+    margin-top: 25px;
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(207,216,220 ,0.2);
+}
+.drop a{
+    display:none;
+    width:70px;
+    text-align: center;
+    margin-top: 10px;
 }
 .head a{
     margin-right: 50px;
@@ -57,6 +70,7 @@ button{
     text-align:center;
     font-size: 17px;
 }
+
 </style>
 </head>
 
@@ -64,7 +78,11 @@ button{
   <div class="head">
     <ul>
       <li><a href="/mandiri/index.php">sewa</a></li>
-      <li><a href="/mandiri/pelanggan/pelanggan.php">Penyewa</a></li>
+      <li><a href="/mandiri/pelanggan/pelanggan.php">Penyewa</a>
+         <div class="drop">
+            <a href="">Table</a>
+            <a href="">Edit</a>
+         </div>
       <li><a href="/mandiri/mobil/mo-bil.php">mobil</a></li>
       <li><a href="">Sopir</a></li>
       <li><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a></li>
