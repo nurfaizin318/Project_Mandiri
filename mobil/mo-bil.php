@@ -1,3 +1,38 @@
+
+<?php
+$link = mysqli_connect("localhost", "root", "", "rentalmobil");
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+
+if(isset($_POST['submit'])){
+
+    $id=$_POST['ID'];
+    $type=$_POST['type'];
+    $merk=$_POST['merk'];
+    $warna=$_POST['warna'];
+    $tahun=$_POST['tahun'];
+    $harga=$_POST['harga'];
+    $no_pol=$_POST['plat'];
+    $status=$_POST['status'];
+    $query = "INSERT INTO `kendaraan`(`ID_mobil`, `type`, `merk`,`warna`,`tahun`,`harga`,`no_pol`,`status`) VALUES ('$id','$type','$merk','$warna','$tahun','$harga','$no_pol','$status')";
+    $result = mysqli_query($link,$query);
+    if(!$result)
+    {
+    echo "data not inserted";
+    }
+
+    mysqli_close($link);
+}
+
+
+    
+    
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,43 +172,48 @@ button{
         </header>
     <h1 style="margin-left:50%;color: #78909C">Mobil</h1>
     <div class="content">
+    <form action="#" method="post">
        <table >
-        <form action="#" method="GET"></form>
         <tr>
             
-            <td> Id Mobil :<br><br><input type="text" ></td>
+            <td> Id Mobil :<br><br><input type="text" name="ID" ></td>
         </tr>
         <tr>
             
-            <td> Type :<br><br><input type="text" ></td>
+            <td> Type :<br><br><input type="text" name="type"></td>
         </tr>
         <tr>
             
-            <td> Merk :<br><br><input type="text" ></td>
+            <td> Merk :<br><br><input type="text" name="merk"></td>
         </tr>
         <tr>
           
-            <td>Tahun :<br><br><input type="text" ></td>
+            <td>Tahun :<br><br><input type="text" name="tahun"></td>
         </tr>
+        <tr>
+          
+          <td>Harga :<br><br><input type="text" name="harga"></td>
+      </tr>
     </tr>
 </tr><tr>
     
-    <td>Plat Nomer :<br><br><input type="text" ></td>
+    <td>Plat Nomer :<br><br><input type="text" name="plat"></td>
 </tr>
     <tr>
       
-        <td>Warna :<br><br><input type="text"></td>
+        <td>Warna :<br><br><input type="text" name="warna"></td>
     </tr>
     <tr>
       
-      <td>Status :<br><br><input type="text"></td>
+      <td>Status :<br><br><input type="text" name="status"></td>
   </tr>
    
         <tr>
             <td>
-    <button type="submit" name="sub">submit
+    <input type="submit" name="submit" >
             </td>
         </tr>
+        </form>
        </table>
     </div>
 </body>

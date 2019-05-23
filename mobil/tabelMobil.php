@@ -1,3 +1,18 @@
+<?php
+$con = mysqli_connect("localhost", "root", "", "rentalmobil");
+if($con === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+echo "Connect Successfully. Host info: " . mysqli_get_host_info($con);
+
+$sql = "SELECT * FROM kendaraan";
+
+$result = mysqli_query($con,$sql)or die(mysqli_error());
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,18 +93,33 @@
 
 td, th {  
     border: 1px solid transparent; /* No more visible border */
-    height: 30px; 
-    transition: all 0.3s;  /* Simple transition for hover effect */
+    height: 70px; 
+    transition: all 0.3s;
+    text-align:left; 
 }
 
 th {  
     background: #DFDFDF;  /* Darken header a bit */
     font-weight: bold;
+    font-size:30;
 }
 
 td {  
     background: #FAFAFA;
-    text-align: center;
+
+}
+table{
+    width:90%;
+}
+.content{
+    margin:auto;
+    margin-top:15px;
+}
+.content table{
+    margin:auto;
+}
+tr td{
+    height:60px;
 }
 
 /* Cells in even rows (2,4,6...) are one color */        
@@ -104,7 +134,7 @@ tr td:hover { background: #666; color: #FFF; }
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>Tabel</title>
 </head>
 <body>
 <div class="head">
@@ -143,28 +173,38 @@ tr td:hover { background: #666; color: #FFF; }
             </div>
         </header>
   <div class="content">
-  <table>  
-<tr>  
-    <th>One</th>
-    <th>Two</th>
-    <th>Three</th>
-</tr>  
-<tr>  
-    <td>Apples</td>
-    <td>Carrots</td>
-    <td>Steak</td>
-</tr>  
-<tr>  
-    <td>Oranges</td>
-    <td>Potato</td>
-    <td>Pork</td>
-</tr>  
-<tr>  
-    <td>Pears</td>
-    <td>Peas</td>
-    <td>Chicken</td>
-</tr>  
-</table> 
+  <table>
+  <th>ID mobil </th>
+  <th>type </th>
+  <th>merek </th>
+  <th>warna </th>
+  <th>tahun </th>
+  <th>harga </th>
+  <th>plat nomor </th>
+  <th>Status </th>
+  <?php while($row = mysqli_fetch_assoc($result) ) { 
+      $id=$row['ID_mobil'];
+      $type=$row['type'];
+      $merk=$row['merk'];
+      $warna=$row['warna'];
+      $tahun=$row['tahun'];
+      $harga=$row['harga'];
+      $plat=$row['no_pol'];
+      $status=$row['status'];
+      
+      ?>
+   
+    <tr>  
+  <td><?php echo $id; ?></td>
+  <td><?php echo $type; ?></td>
+  <td><?php echo $merk; ?></td>
+  <td><?php echo $warna; ?></td>
+  <td><?php echo $tahun ?></td>
+  <td><?php echo $harga; ?></td>
+  <td><?php echo $plat; ?></td>
+  <td><?php echo $status; ?></td>
+  </tr>
+  <?php } ?>
   </div>
 </body>
 </html>

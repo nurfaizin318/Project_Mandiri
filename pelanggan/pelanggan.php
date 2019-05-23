@@ -127,8 +127,8 @@ button{
                     </li>
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
-                            <li><a href="#">Sub Menu 1</a></li>
-                            <li><a href="#">Sub Menu 2</a></li>
+                            <li><a href="#">edit</a></li>
+                            <li><a href="#">tabel</a></li>
                         </ul>
                     </li>
                 <h1 style="line-height:10px;">Rental Mobil</h1>
