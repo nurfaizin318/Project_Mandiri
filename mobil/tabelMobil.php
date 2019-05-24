@@ -11,6 +11,17 @@ $sql = "SELECT * FROM kendaraan";
 $result = mysqli_query($con,$sql)or die(mysqli_error());
 
 
+if (isset($_GET['edit'])) {
+    $id = $_GET['edit'];
+    $update = true;
+    $record = mysqli_query($con, "SELECT * FROM kendaraan WHERE ID_mobil =12");
+
+    if (count($record) == 1 ) {
+        $n = mysqli_fetch_array($record);
+        $name = $n['name'];
+        $address = $n['address'];
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -95,7 +106,8 @@ td, th {
     border: 1px solid transparent; /* No more visible border */
     height: 70px; 
     transition: all 0.3s;
-    text-align:left; 
+    text-align:center;
+
 }
 
 th {  
@@ -106,6 +118,7 @@ th {
 
 td {  
     background: #FAFAFA;
+    text-align: center;
 
 }
 table{
@@ -120,6 +133,27 @@ table{
 }
 tr td{
     height:60px;
+}
+#btnEdit{
+    background:#2196F3;
+    color:white;
+    width:100px;
+    height:40px;
+    border:none;
+    margin:auto;
+    border-radius: 7px;
+    font-size: 18px;
+    
+}
+#btnHapus{
+    background:#FF5722;
+    color:white;
+    width:100px;
+    height:40px;
+    border:none;
+    margin-left:20px;
+    border-radius: 7px;
+    font-size: 18px;
 }
 
 /* Cells in even rows (2,4,6...) are one color */        
@@ -182,6 +216,7 @@ tr td:hover { background: #666; color: #FFF; }
   <th>harga </th>
   <th>plat nomor </th>
   <th>Status </th>
+  <th>Option</th>
   <?php while($row = mysqli_fetch_assoc($result) ) { 
       $id=$row['ID_mobil'];
       $type=$row['type'];
@@ -203,8 +238,10 @@ tr td:hover { background: #666; color: #FFF; }
   <td><?php echo $harga; ?></td>
   <td><?php echo $plat; ?></td>
   <td><?php echo $status; ?></td>
+  <td><?php echo "<a href=/mandiri/mobil/editMobil.php?id=".$row['ID_mobil']."><button id='btnEdit' name='edit'>edit</button><button id='btnHapus' name='hapus'>hapus</button> </a>" ?></td>
   </tr>
   <?php } ?>
   </div>
+ 
 </body>
 </html>
