@@ -11,15 +11,21 @@ $sql = "SELECT * FROM kendaraan";
 $result = mysqli_query($con,$sql)or die(mysqli_error());
 
 
-if (isset($_GET['edit'])) {
-    $id = $_GET['edit'];
+if (isset($_POST['edit'])) {
+    $ID = $_POST['edit'];
     $update = true;
-    $record = mysqli_query($con, "SELECT * FROM kendaraan WHERE ID_mobil =12");
+    $record = mysqli_query($con, "SELECT * FROM kendaraan WHERE ID_mobil =$ID");
 
     if (count($record) == 1 ) {
         $n = mysqli_fetch_array($record);
-        $name = $n['name'];
-        $address = $n['address'];
+        $IDmobil = $n['ID_mobil'];
+        $merek = $n['merk'];
+        $warna = $n['warna'];
+        $tahun = $n['tahun'];
+        $harga = $n['harga'];
+        $platNomor = $n['no_pol'];
+        $status=$n['status'];
+
     }
 }
 
@@ -238,7 +244,7 @@ tr td:hover { background: #666; color: #FFF; }
   <td><?php echo $harga; ?></td>
   <td><?php echo $plat; ?></td>
   <td><?php echo $status; ?></td>
-  <td><?php echo "<a href=/mandiri/mobil/editMobil.php?id=".$row['ID_mobil']."><button id='btnEdit' name='edit'>edit</button><button id='btnHapus' name='hapus'>hapus</button> </a>" ?></td>
+  <td><?php echo "<a href='/mandiri/mobil/editMobil.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a>" ?></td>
   </tr>
   <?php } ?>
   </div>

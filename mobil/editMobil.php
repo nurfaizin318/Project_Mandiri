@@ -1,3 +1,44 @@
+<?php 
+@$id=$_GET['id'];
+$con = mysqli_connect("localhost", "root", "", "rentalmobil");
+if($con === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+$sql = "SELECT * FROM kendaraan WHERE ID_mobil='$id'";
+$result = mysqli_query($con,$sql)or die(mysqli_error($sql));
+
+while($row = mysqli_fetch_assoc($result) ) { 
+    $IDmobil=$row['ID_mobil'];
+    $type=$row['type'];
+    $merk=$row['merk'];
+    $warna=$row['warna'];
+    $tahun=$row['tahun'];
+    $harga=$row['harga'];
+    $plat=$row['no_pol'];
+    $status=$row['status'];
+
+}
+
+if(isset($_POST['sub'])){
+     $ID=$_POST['id'];
+     $merkMobil=$_POST['merk'];
+     $typeMobil=$_POST['type'];
+     $warnaMobil=$_POST['warna'];
+     $tahunMobil=$_POST['tahun'];
+     $hargaMobil=$_POST['harga'];
+     $platMobil=$_POST['plat'];
+     $statusMobil=$_POST['status'];
+    
+    $sql = "UPDATE Kendaraan SET type='$typeMobil' ,merk='$merkMobil',warna='$warnaMobil',tahun='$tahunMobil',harga='$hargaMobil',no_pol='$platMobil',status='$statusMobil' WHERE ID_mobil='$ID'";
+
+    $result= mysqli_query($con,$sql);
+    if(!$result){
+        echo "eror";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,35 +179,40 @@ button{
     <h1 style="margin-left:50%;color: #78909C">Mobil</h1>
     <div class="content">
        <table >
-        <form action="#" method="GET"></form>
+        <form action="/mandiri/mobil/tabelMobil.php" method="POST   ">
         <tr>
             
-            <td> Id Mobil :<br><br><input type="text" value="<?php echo $id; ?>"></td>
+            <td> Id Mobil :<br><br><input name="id" type="text" value="<?php echo $IDmobil; ?>"></td>
         </tr>
         <tr>
             
-            <td> Type :<br><br><input type="text" ></td>
+            <td> Type :<br><br><input name="type" type="text" value="<?php echo $type; ?>"></td>
         </tr>
         <tr>
             
-            <td> Merk :<br><br><input type="text" ></td>
+            <td> Merk :<br><br><input name="merk" type="text" value="<?php echo $merk; ?>"></td>
         </tr>
         <tr>
           
-            <td>Tahun :<br><br><input type="text" ></td>
+            <td>Tahun :<br><br><input name="tahun" type="text" value="<?php echo $tahun; ?>"></td>
         </tr>
-    </tr>
-</tr><tr>
+        <tr>
+          
+          <td>harga :<br><br><input name="harga" type="text" value="<?php echo $tahun; ?>"></td>
+      </tr>
+  
     
-    <td>Plat Nomer :<br><br><input type="text" ></td>
+<tr>
+    
+    <td>Plat Nomer :<br><br><input name="plat" type="text" value="<?php echo $plat; ?>"></td>
 </tr>
     <tr>
       
-        <td>Warna :<br><br><input type="text"></td>
+        <td>Warna :<br><br><input name="warna" type="text" value="<?php echo $warna; ?>"></td>
     </tr>
     <tr>
       
-      <td>Status :<br><br><input type="text"></td>
+      <td>Status :<br><br><input name="status" type="text" value="<?php echo $status; ?>"></td>
   </tr>
    
         <tr>
@@ -174,6 +220,7 @@ button{
     <button type="submit" name="sub">Update
             </td>
         </tr>
+        </form>
        </table>
     </div>
 </body>
