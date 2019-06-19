@@ -1,6 +1,7 @@
 <?php 
 @$id=$_GET['id'];
 $con = mysqli_connect("localhost", "root", "", "rentalmobil");
+
 if($con === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
@@ -20,7 +21,7 @@ while($row = mysqli_fetch_assoc($result) ) {
 
 }
 
-if(isset($_POST['sub'])){
+if(isset($_POST['update-mobil'])){
      $ID=$_POST['id'];
      $merkMobil=$_POST['merk'];
      $typeMobil=$_POST['type'];
@@ -30,12 +31,15 @@ if(isset($_POST['sub'])){
      $platMobil=$_POST['plat'];
      $statusMobil=$_POST['status'];
     
-    $sql = "UPDATE Kendaraan SET type='$typeMobil' ,merk='$merkMobil',warna='$warnaMobil',tahun='$tahunMobil',harga='$hargaMobil',no_pol='$platMobil',status='$statusMobil' WHERE ID_mobil='$ID'";
+    $query = "UPDATE Kendaraan SET type='$typeMobil' ,merk='$merkMobil',warna='$warnaMobil',tahun='$tahunMobil',harga='$hargaMobil',no_pol='$platMobil',status='$statusMobil' WHERE ID_mobil='$ID'";
+   
 
-    $result= mysqli_query($con,$sql);
+    $result= mysqli_query($con,$query);
     if(!$result){
         echo "eror";
     }
+    if($query)
+            header('Location: /mandiri/mobil/tabelMobil.php');
 }
 ?>
 
@@ -149,25 +153,26 @@ button{
                     <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
-                            <li><a href="/mandiri/mobil/editMobil.php">edit</a></li>
+                           
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
+                                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
                         <ul class="isi-dropdown">
-                            <li><a href="#">tabel</a></li>
-                            <li><a href="#">edit</a></li>
+                            <li><a href="/mandiri/pelanggan/tabel-pelanggan.php">tabel</a></li>
+                           
                         </ul>
-                    </li>
+                    </li> 
+
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
                                     <li><a href="#">tabel</a></li>
-                                    <li><a href="#">edit</a></li>
+                                   
                                 </ul>
                             </li>
                     </li>
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
-                            <li><a href="#">edit</a></li>
+                           
                             <li><a href="#">tabel</a></li>
                         </ul>
                     </li>
@@ -179,7 +184,7 @@ button{
     <h1 style="margin-left:50%;color: #78909C">Mobil</h1>
     <div class="content">
        <table >
-        <form action="/mandiri/mobil/tabelMobil.php" method="POST   ">
+        <form action="#" method="POST">
         <tr>
             
             <td> Id Mobil :<br><br><input name="id" type="text" value="<?php echo $IDmobil; ?>"></td>
@@ -198,7 +203,7 @@ button{
         </tr>
         <tr>
           
-          <td>harga :<br><br><input name="harga" type="text" value="<?php echo $tahun; ?>"></td>
+          <td>harga :<br><br><input name="harga" type="text" value="<?php echo $harga; ?>"></td>
       </tr>
   
     
@@ -217,7 +222,7 @@ button{
    
         <tr>
             <td>
-    <button type="submit" name="sub">Update
+    <button type="submit" name="update-mobil">Update
             </td>
         </tr>
         </form>

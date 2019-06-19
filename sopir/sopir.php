@@ -108,25 +108,26 @@ button{
                     <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
-                            <li><a href="/mandiri/mobil/editMobil.php">edit</a></li>
+                           
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
+                                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
                         <ul class="isi-dropdown">
-                            <li><a href="#">tabel</a></li>
-                            <li><a href="#">edit</a></li>
+                            <li><a href="/mandiri/pelanggan/tabel-pelanggan.php">tabel</a></li>
+                           
                         </ul>
-                    </li>
+                    </li> 
+
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
                                     <li><a href="#">tabel</a></li>
-                                    <li><a href="#">edit</a></li>
+                                   
                                 </ul>
                             </li>
                     </li>
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
-                            <li><a href="#">edit</a></li>
+                           
                             <li><a href="#">tabel</a></li>
                         </ul>
                     </li>

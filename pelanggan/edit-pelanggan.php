@@ -1,18 +1,40 @@
+<?php
+$link = mysqli_connect("localhost", "root", "", "rentalmobil");
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+
+if(isset($_POST['sub'])){
+
+    $id=$_POST['ID'];
+    $type=$_POST['type'];
+    $merk=$_POST['merk'];
+    $warna=$_POST['warna'];
+    $tahun=$_POST['tahun'];
+    $harga=$_POST['harga'];
+    $no_pol=$_POST['plat'];
+    $status=$_POST['status'];
+    $query = "INSERT INTO `kendaraan`(`ID_mobil`, `type`, `merk`,`warna`,`tahun`,`harga`,`no_pol`,`status`) VALUES ('$id','$type','$merk','$warna','$tahun','$harga','$no_pol','$status')";
+    $result = mysqli_query($link,$query);
+    if(!$result)
+    {
+    echo "data not inserted";
+    }
+
+    mysqli_close($link);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
     <style>
-        body {
-            background-color: white;
-        }
+    body{
+    background: white;
+}
 
-        .menu-malasngoding {
+.menu-malasngoding {
             background-color: white;
             box-shadow: 0 5px 10px rgba(207, 216, 220, 0.3);
             height: 60px;
@@ -75,36 +97,36 @@
             color: #232323 !important;
             background: #f3f3f3 !important;
         }
-
-        .content table {
-            width: 80%;
-            margin-left: 10%;
-            font-size: 20px;
-            position: absolute;
-
-        }
-
-        td input[type='text'] {
-            width: 700px;
-            height: 70%;
-            border-radius: 5px solid;
-            font-size: 20px;
-        }
-
-        td {
-            height: 50px;
-            padding: 20px;
-        }
-
-        button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            font-size: 17px;
-        }
+.content table{
+    width:80%;
+    margin: auto;
+    font-size: 20px;
+    
+}
+td input[type='text']{
+    width: 100%;
+    height:70%;
+    border-radius: 5px solid;
+    font-size: 20px;
+}
+td{
+    height: 50px;
+    padding: 20px;
+}
+button{
+    background-color: #4CAF50;
+    border:none;
+    color:white;
+    padding: 15px 32px;
+    text-align:center;
+    font-size: 17px;
+}
     </style>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
 <div class="head">
@@ -128,13 +150,14 @@
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
                                     <li><a href="#">tabel</a></li>
+                                   
                                 </ul>
                             </li>
                     </li>
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
-                            <li><a href="#">tabel </a></li>
                            
+                            <li><a href="#">tabel</a></li>
                         </ul>
                     </li>
                 <h1 style="line-height:10px;">Rental Mobil</h1>
@@ -142,43 +165,44 @@
                 </ul>
             </div>
         </header>
+    <h1 style="margin-left:50%;color: #78909C">Penyewa</h1>
     <div class="content">
-        <table>
-            <form action="#" method="GET"></form>
-            <tr>
-
-                <td> Id Transaksi :<br><br><input type="text"></td>
-                <td> Id Customer :<br><br><input type="text"></td>
-            </tr>
-            <tr>
-
-                <td> Id mobil :<br><br><input type="text"></td>
-                <td>Id Sopir :<br><br><input type="text"></td>
-            </tr>
-
-            </tr>
-            <tr>
-
-                <td>Tanggal sewa :<br><br><input type="text"></td>
-                <td>Lama Sewa:<br><br><input type="text"></td>
-            </tr>
-            <tr>
-
-                <td>Tanggal Kembali:<br><br><input type="text"></td>
-                <td>Uang Muka:<br><br><input type="text"></td>
-            </tr>
-            <tr>
-
-                <td>Sisa Bayar<br><br><input type="text"></td>
-                <td>Kembalian<br><br><input type="text"></td>
-            </tr>
-            <tr>
-                <td>
-                    <button type="submit" name="sub">submit
-                </td>
-            </tr>
-        </table>
+       <table >
+        <form action="#" method="GET"></form>
+        <tr>
+            
+            <td> Id Penyewa :<br><br><input type="text" ></td>
+        </tr>
+        <tr>
+            
+            <td> Nama :<br><br><input type="text" ></td>
+        </tr>
+        <tr>
+          
+            <td>No Ktp :<br><br><input type="text" ></td>
+        </tr>
+    </tr>
+</tr><tr>
+    
+    <td>No Telepon :<br><br><input type="text" ></td>
+</tr>
+    <tr>
+      
+        <td>Alamat :<br><br><input type="text"></td>
+    </tr>
+    <tr>
+      
+      <td>Kota :<br><br><input type="text"></td>
+  </tr>
+  <tr>
+      <td> Jenis Kelamin :<br><br><input type="radio">Laki-Laki<input type="radio">Perempuan</td>
+</tr>
+        <tr>
+            <td>
+    <button type="submit" name="sub">Update
+            </td>
+        </tr>
+       </table>
     </div>
-    </body>
-
+</body>
 </html>

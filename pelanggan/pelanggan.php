@@ -1,6 +1,31 @@
 <?php
+$link = mysqli_connect("localhost", "root", "", "rentalmobil");
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
  
+
+if(isset($_POST['submite'])){
+
+    $id=$_POST['id'];
+    $nama=$_POST['nama'];
+    $no_ktp=$_POST['no_ktp'];
+    $no_hp=$_POST['no_hp'];
+    $alamat=$_POST['alamat'];
+    $kota=$_POST['kota'];
+    $jk=$_POST['jk'];
+
+    $query = "INSERT INTO `customer`(`ID_customer`, `nama`, `no_ktp`,`jenis_kelamin`,`no_hp`,`alamat`,`kota`) VALUES ('$id','$nama','$no_ktp','$jk','$no_hp','$alamat','$kota')";
+    $result = mysqli_query($link,$query);
+    if(!$result)
+    {
+    echo "data not inserted";
+    }
+
+    mysqli_close($link);
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,25 +137,26 @@ button{
                     <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
-                            <li><a href="/mandiri/mobil/editMobil.php">edit</a></li>
+                           
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
+                                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
                         <ul class="isi-dropdown">
-                            <li><a href="#">tabel</a></li>
-                            <li><a href="#">edit</a></li>
+                            <li><a href="/mandiri/pelanggan/tabel-pelanggan.php">tabel</a></li>
+                           
                         </ul>
-                    </li>
+                    </li> 
+
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
                                     <li><a href="#">tabel</a></li>
-                                    <li><a href="#">edit</a></li>
+                                   
                                 </ul>
                             </li>
                     </li>
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
-                            <li><a href="#">edit</a></li>
+                           
                             <li><a href="#">tabel</a></li>
                         </ul>
                     </li>
@@ -142,40 +168,41 @@ button{
     <h1 style="margin-left:50%;color: #78909C">Penyewa</h1>
     <div class="content">
        <table >
-        <form action="#" method="GET"></form>
+        <form \ method="post">
         <tr>
             
-            <td> Id Penyewa :<br><br><input type="text" ></td>
+            <td> Id Penyewa :<br><br><input type="text" name="id"></td>
         </tr>
         <tr>
             
-            <td> Nama :<br><br><input type="text" ></td>
+            <td> Nama :<br><br><input type="text" name="nama"></td>
         </tr>
         <tr>
           
-            <td>No Ktp :<br><br><input type="text" ></td>
+            <td>No Ktp :<br><br><input type="text" name="no_ktp"></td>
         </tr>
     </tr>
 </tr><tr>
     
-    <td>No Telepon :<br><br><input type="text" ></td>
+    <td>No Telepon :<br><br><input type="text" name="no_hp"></td>
 </tr>
     <tr>
       
-        <td>Alamat :<br><br><input type="text"></td>
+        <td>Alamat :<br><br><input type="text" name="alamat"></td>
     </tr>
     <tr>
       
-      <td>Kota :<br><br><input type="text"></td>
+      <td>Kota :<br><br><input type="text" name="kota"></td>
   </tr>
   <tr>
-      <td> Jenis Kelamin :<br><br><input type="radio">Laki-Laki<input type="radio">Perempuan</td>
+      <td> Jenis Kelamin :<br><br><input type="radio" name="jk">Laki-Laki<input type="radio" name="jk">Perempuan</td>
 </tr>
         <tr>
             <td>
-    <button type="submit" name="sub">submit
+    <button type="submit" name="submite">submit
             </td>
         </tr>
+        </form>
        </table>
     </div>
 </body>
