@@ -1,30 +1,45 @@
 <?php
+@$id=$_GET['id'];
 $link = mysqli_connect("localhost", "root", "", "rentalmobil");
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
  
+$sql = "SELECT * FROM customer WHERE ID_customer='$id'";
+$result = mysqli_query($link,$sql)or die(mysqli_error($sql));
+
+while($row = mysqli_fetch_assoc($result) ) { 
+    $IDcustomer=$row['ID_customer'];
+    $nama=$row['nama'];
+    $no_ktp=$row['no_ktp'];
+    $jk=$row['jenis_kelamin'];
+    $noHp=$row['no_hp'];
+    $alamat=$row['alamat'];
+    $kota=$row['kota'];
+
+ 
+}
 
 if(isset($_POST['sub'])){
 
-    $id=$_POST['ID'];
-    $type=$_POST['type'];
-    $merk=$_POST['merk'];
-    $warna=$_POST['warna'];
-    $tahun=$_POST['tahun'];
-    $harga=$_POST['harga'];
-    $no_pol=$_POST['plat'];
-    $status=$_POST['status'];
-    $query = "INSERT INTO `kendaraan`(`ID_mobil`, `type`, `merk`,`warna`,`tahun`,`harga`,`no_pol`,`status`) VALUES ('$id','$type','$merk','$warna','$tahun','$harga','$no_pol','$status')";
-    $result = mysqli_query($link,$query);
-    if(!$result)
-    {
-    echo "data not inserted";
-    }
+    $id=$_POST['id'];
+    $nama=$_POST['nama'];
+    $no_ktp=$_POST['no_ktp'];
+    $no_hp=$_POST['noHp'];
+    $alamat=$_POST['alamat'];
+    $kota=$_POST['kota'];
+    $jk=$_POST['jenis_kelamin'];
+    $query = "UPDATE customer SET  nama='$nama',no_ktp='$no_ktp',jenis_kelamin='$jk',no_hp='$no_hp',alamat='$alamat',kota='$kota' WHERE ID_customer='$id'";
+    $result= mysqli_query($link,$query);
 
-    mysqli_close($link);
+    if(!$result){
+        echo "eror";
+    }
+    if($query)
+            header('Location: /mandiri/pelanggan/tabel-pelanggan.php');
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -168,40 +183,41 @@ button{
     <h1 style="margin-left:50%;color: #78909C">Penyewa</h1>
     <div class="content">
        <table >
-        <form action="#" method="GET"></form>
+        <form  method="post">
         <tr>
             
-            <td> Id Penyewa :<br><br><input type="text" ></td>
+            <td> Id Penyewa :<br><br><input type="text" name="id" value=<?php echo $IDcustomer ?>></td>
         </tr>
         <tr>
             
-            <td> Nama :<br><br><input type="text" ></td>
+            <td> Nama :<br><br><input type="text" name="nama" value=<?php echo $nama ?>></td>
         </tr>
         <tr>
           
-            <td>No Ktp :<br><br><input type="text" ></td>
+            <td>No Ktp :<br><br><input type="text"  name="no_ktp" value=<?php echo $no_ktp ?>></td>
         </tr>
     </tr>
 </tr><tr>
     
-    <td>No Telepon :<br><br><input type="text" ></td>
+    <td>No Telepon :<br><br><input type="text" name="noHp" value=<?php echo $noHp ?>></td>
 </tr>
     <tr>
       
-        <td>Alamat :<br><br><input type="text"></td>
+        <td>Alamat :<br><br><input type="text" name="alamat" value=<?php echo $alamat ?>></td>
     </tr>
     <tr>
       
-      <td>Kota :<br><br><input type="text"></td>
+      <td>Kota :<br><br><input type="text" name="kota" value=<?php echo $kota ?>></td>
   </tr>
   <tr>
-      <td> Jenis Kelamin :<br><br><input type="radio">Laki-Laki<input type="radio">Perempuan</td>
+      <td> Jenis Kelamin :<br><br><input type="radio" name="jenis_kelamin">Laki-Laki<input type="radio">Perempuan</td>
 </tr>
         <tr>
             <td>
     <button type="submit" name="sub">Update
             </td>
         </tr>
+        </form>
        </table>
     </div>
 </body>

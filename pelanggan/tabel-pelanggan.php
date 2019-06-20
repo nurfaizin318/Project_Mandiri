@@ -7,18 +7,11 @@ if($con === false){
 echo "Connect Successfully. Host info: " . mysqli_get_host_info($con);
 
 $sql = "SELECT * FROM customer";
-
-
 $result = mysqli_query($con,$sql)or die(mysqli_error());
-
-
 
 if (isset($_POST['edit'])) {
     $ID = $_POST['edit'];
     $update = true;
-    $record = mysqli_query($con, "SELECT * FROM customer ");
-
-  
     $n = mysqli_fetch_array($record);
     $IDmobil = $n['ID_customer'];
     $merek = $n['nama'];
@@ -251,15 +244,11 @@ tr td:hover { background: #666; color: #FFF; }
 } 
 if(isset($_POST['hapus'])){
     @$idplg=$_GET['id'];
-        
-    
         $query="DELETE FROM customer WHERE ID_customer='$idplg'";
         $result=mysqli_query($con,$query);
         if(!$result){
             echo "eror";
         }
-      
-       
      } ?>
   </div>
  

@@ -6,7 +6,7 @@ if($con === false){
  
 echo "Connect Successfully. Host info: " . mysqli_get_host_info($con);
 
-$sql = "SELECT * FROM customer";
+$sql = "SELECT * FROM kendaraan";
 
 
 $result = mysqli_query($con,$sql)or die(mysqli_error());
@@ -16,22 +16,18 @@ $result = mysqli_query($con,$sql)or die(mysqli_error());
 if (isset($_POST['edit'])) {
     $ID = $_POST['edit'];
     $update = true;
-    $record = mysqli_query($con, "SELECT * FROM customer ");
+    $record = mysqli_query($con, "SELECT * FROM kendaraan ");
 
   
         $n = mysqli_fetch_array($record);
-        $IDmobil = $n['ID_customer'];
-        $merek = $n['nama'];
-        $warna = $n['no_ktp'];
-        $tahun = $n['jenis_kelamin'];
-        $harga = $n['no_hp'];
-        $platNomor = $n['alamat'];
-        $status=$n['kota'];
-
-   
+        $IDmobil = $n['ID_mobil'];
+        $merek = $n['merk'];
+        $warna = $n['warna'];
+        $tahun = $n['tahun'];
+        $harga = $n['harga'];
+        $platNomor = $n['no_pol'];
+        $status=$n['status'];
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -190,13 +186,12 @@ tr td:hover { background: #666; color: #FFF; }
                            
                         </ul>
                     </li>
-                                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
+                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
                         <ul class="isi-dropdown">
-                            <li><a href="/mandiri/pelanggan/tabel-pelanggan.php">tabel</a></li>
+                            <li><a href="#">tabel</a></li>
                            
                         </ul>
-                    </li> 
-
+                    </li>
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
                                     <li><a href="#">tabel</a></li>
