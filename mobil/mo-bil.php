@@ -139,8 +139,12 @@ button{
         <header class="header">
             <div class="menu-malasngoding">
                 <ul>
-                    <li><a href="/mandiri/index.php">Home</a></li>
-                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
+                     <li class="dropdown"><a href="/mandiri/index.php">Home</a>
+                        <ul class="isi-dropdown">
+                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                           
+                        </ul>
+                    </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
@@ -155,7 +159,7 @@ button{
 
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
-                                    <li><a href="#">tabel</a></li>
+                                    <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                                    
                                 </ul>
                             </li>

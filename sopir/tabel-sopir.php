@@ -6,14 +6,13 @@ if($con === false){
  
 echo "Connect Successfully. Host info: " . mysqli_get_host_info($con);
 
-$sql = "SELECT * FROM customer";
+$sql = "SELECT * FROM supir";
 $result = mysqli_query($con,$sql)or die(mysqli_error());
 
 if (isset($_POST['edit'])) {
     $ID = $_POST['edit'];
-    $update = true;
     $n = mysqli_fetch_array($record);
-    $IDmobil = $n['ID_customer'];
+    $IDsupir = $n['supir'];
     $merek = $n['nama'];
     $warna = $n['no_ktp'];
     $tahun = $n['jenis_kelamin'];
@@ -213,42 +212,39 @@ tr td:hover { background: #666; color: #FFF; }
         </header>
   <div class="content">
   <table>
-  <th>ID Penyewa </th>
-  <th>namespace </th>
-  <th>no Ktp </th>
-  <th>Jenis Kelamin </th>
-  <th>No HP  </th>
+  <th>ID Supir </th>
+  <th>nama </th>
+  <th>no sim </th>
+  <th>no hp </th>
   <th>Alamat</th>
-  <th>Kota</th>
+  <th>status</th>
   <th>pilihan</th>
   
  
   <?php while($row = mysqli_fetch_assoc($result) ) { 
-      $id=$row['ID_customer'];
+      $id=$row['ID_supir'];
       $nama=$row['nama'];
-      $no_ktp=$row['no_ktp'];
-      $jenis_kelamin=$row['jenis_kelamin'];
+      $no_sim=$row['no_sim'];
       $no_hp=$row['no_hp'];
       $alamat=$row['alamat'];
-      $kota=$row['kota'];      
+      $status=$row['status'];      
       ?>
    
     <tr>  
   <td><?php echo $id; ?></td>
   <td><?php echo $nama; ?></td>
-  <td><?php echo $no_ktp; ?></td>
-  <td><?php echo $jenis_kelamin; ?></td>
+  <td><?php echo $no_sim; ?></td>
   <td><?php echo $no_hp ?></td>
   <td><?php echo $alamat; ?></td>
-  <td><?php echo $kota; ?></td>
-  <td><?php echo "<a href='/mandiri/pelanggan/edit-pelanggan.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href='/mandiri/mobil/tabelMobil.php'><form action='/mandiri/pelanggan/tabel-pelanggan.php?id=".$id."' method='post'> <button name='hapus' id='btnHapus'>hapus</button></form></a>" 
+  <td><?php echo $status; ?></td>
+  <td><?php echo "<a href='/mandiri/sopir/edit-supir.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href='/mandiri/sopir/tabel-sopir.php'><form action='/mandiri/sopir/tabel-sopir.php?id=".$id."' method='post'> <button name='hapus' id='btnHapus'>hapus</button></form></a>" 
   ?></td>
   </tr>
   <?php 
 } 
 if(isset($_POST['hapus'])){
-    @$idplg=$_GET['id'];
-        $query="DELETE FROM customer WHERE ID_customer='$idplg'";
+    @$id=$_GET['id'];
+        $query="DELETE FROM supir WHERE ID_supir='$id'";
         $result=mysqli_query($con,$query);
         if(!$result){
             echo "eror";

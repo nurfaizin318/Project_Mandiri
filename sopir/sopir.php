@@ -1,3 +1,28 @@
+<?php
+$link = mysqli_connect("localhost", "root", "", "rentalmobil");
+if($link === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+
+if(isset($_POST['sub'])){
+    $id=$_POST['id'];
+    $nama=$_POST['nama'];
+    $no_sim=$_POST['no_sim'];
+    $no_hp=$_POST['no_hp'];
+    $alamat=$_POST['alamat'];
+    $status=$_POST['status'];
+
+    $query = "INSERT INTO `supir`(`ID_supir`, `nama`, `no_sim`,`no_hp`,`alamat`,`status`) VALUES ('$id','$nama','$no_sim','$no_hp','$alamat','$status')";
+    $result = mysqli_query($link,$query);
+    if(!$result)
+    {
+    echo "data not inserted";
+    }
+
+    mysqli_close($link);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,8 +129,12 @@ button{
         <header class="header">
             <div class="menu-malasngoding">
                 <ul>
-                    <li><a href="/mandiri/index.php">Home</a></li>
-                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
+                     <li class="dropdown"><a href="/mandiri/index.php">Home</a>
+                        <ul class="isi-dropdown">
+                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                           
+                        </ul>
+                    </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
@@ -120,7 +149,7 @@ button{
 
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
-                                    <li><a href="#">tabel</a></li>
+                                    <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                                    
                                 </ul>
                             </li>
@@ -128,7 +157,7 @@ button{
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
                            
-                            <li><a href="#">tabel</a></li>
+                            <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                         </ul>
                     </li>
                 <h1 style="line-height:10px;">Rental Mobil</h1>
@@ -139,31 +168,31 @@ button{
     <h1 style="margin-left:50%;color: #78909C">Supir</h1>
     <div class="content">
        <table >
-        <form action="#" method="GET"></form>
+        <form action="#" method="post">
         <tr>
             
-            <td> Id Supir :<br><br><input type="text" ></td>
+            <td> Id Supir :<br><br><input type="text" name="id" ></td>
         </tr>
         <tr>
             
-            <td> Nama :<br><br><input type="text" ></td>
+            <td> Nama :<br><br><input type="text"  name="nama"></td>
         </tr>
         <tr>
             
-            <td> No SIM :<br><br><input type="text" ></td>
+            <td> No SIM :<br><br><input type="text" name="no_sim" ></td>
         </tr>
         <tr>
           
-            <td>No Telepon :<br><br><input type="text" ></td>
+            <td>No Telepon :<br><br><input type="text" name="no_hp" ></td>
         </tr>
     </tr>
 </tr><tr>
     
-    <td>Alamat :<br><br><input type="text" ></td>
+    <td>Alamat :<br><br><input type="text" name="alamat"></td>
 </tr>
     <tr>
       
-        <td>Status :<br><br><input type="text"></td>
+        <td>Status :<br><br><input type="text" name="status"></td>
     </tr>
  
         <tr>
@@ -171,6 +200,7 @@ button{
     <button type="submit" name="sub">submit
             </td>
         </tr>
+        </form>
        </table>
     </div>
 </body>

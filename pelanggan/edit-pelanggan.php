@@ -148,8 +148,12 @@ button{
         <header class="header">
             <div class="menu-malasngoding">
                 <ul>
-                    <li><a href="/mandiri/index.php">Home</a></li>
-                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
+                     <li class="dropdown"><a href="/mandiri/index.php">Home</a>
+                        <ul class="isi-dropdown">
+                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                           
+                        </ul>
+                    </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
@@ -164,7 +168,7 @@ button{
 
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
-                                    <li><a href="#">tabel</a></li>
+                                    <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                                    
                                 </ul>
                             </li>
@@ -172,7 +176,7 @@ button{
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
                            
-                            <li><a href="#">tabel</a></li>
+                            <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                         </ul>
                     </li>
                 <h1 style="line-height:10px;">Rental Mobil</h1>
@@ -210,7 +214,7 @@ button{
       <td>Kota :<br><br><input type="text" name="kota" value=<?php echo $kota ?>></td>
   </tr>
   <tr>
-      <td> Jenis Kelamin :<br><br><input type="radio" name="jenis_kelamin">Laki-Laki<input type="radio">Perempuan</td>
+      <td> Jenis Kelamin :<br><br><input type="radio" checked="checked" name="jenis_kelamin">Laki-Laki<input type="radio">Perempuan</td>
 </tr>
         <tr>
             <td>

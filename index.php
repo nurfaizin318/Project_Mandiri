@@ -1,3 +1,75 @@
+<?php  
+$status="";
+$sewa=600000;
+$tglKembali="";
+$lama=null;
+$bayar=null;
+$total=null;
+$uangMuka=null;
+$sisaBayar=null;
+$kembalian=null;
+$id_transaksi=null;
+$con = mysqli_connect("localhost", "root", "", "rentalmobil");
+if($con === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+ 
+
+echo "Connect Successfully. Host info: " . mysqli_get_host_info($con);
+$sql = "SELECT * FROM kendaraan";
+$result = mysqli_query($con,$sql)or die(mysqli_error());
+$querySupir="select * from supir";
+$resultSupir=mysqli_query($con,$querySupir)or die(mysqli_error());
+if(isset($_POST['chekId'])){
+    $ktp=$_POST['id1'];
+
+    $sql="select * from customer where no_ktp='$ktp'";
+    $hasil=mysqli_query($con,$sql);
+    $row=mysqli_fetch_assoc($hasil);
+    $id=$row['ID_customer'];
+    if($row>0){
+        $status=$id;
+    }
+    else{
+        $status="kosong";
+    }
+}
+ if(isset($_POST['submit'])){
+    $lama=$_POST['lama'];
+    $id_transaksi=$_POST['id_transaksi'];
+    $tglKembali= date('d-m-Y', strtotime("+$lama days"));
+    $bayar = $sewa*$lama;
+    $uangMuka=$_POST['uangMuka'];
+    $total =$bayar-$uangMuka;
+    if($uangMuka < $bayar){
+        $total=0;
+        $kembalian=abs($uangMuka-$bayar);
+    }
+  
+}
+if(isset($_POST['simpan'])){
+    $id_transaksi=$_POST['id2'];
+    $id_customer=$_POST['id2'];
+    $id_mobil=$_POST['id_mobil'];
+    $tanggal_sewa=$POST['tanggal_sewa'];
+    $lama_sewa=$_POST['lama'];
+    $tanggal_kembali=$_POST['tanggal_kembali'];
+    $bayar=$_POST['bayar'];
+    $uang_muka=$_POST['uang_muka'];
+    $sisa_bayar=$_POST['sisabBayar'];
+    $kembalian=$_POST['kembalian'];
+
+    $query = "INSERT INTO `transaksi`(`ID_transaksi`, `ID_customer`, `ID_mobil`,`tanggal_sewa`,`lama_sewa`,`tangal_kembali`,`bayar`,`uang_muka`,`sisa_bayar`,`kembalian`) VALUES ('$id_transaksi','$id_customer','$id_mobil','$tanggal_sewa','$lama_sewa','$tangal_kembali','$bayar','$uang_muka','$bayar','$kembalian')";
+    $result = mysqli_query($link,$query);
+    if(!$result)
+    {
+    echo "data not inserted";
+    }
+
+    mysqli_close($link);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,7 +158,7 @@
 
         td input[type='text'] {
             width: 700px;
-            height: 70%;
+            height: 50px;
             border-radius: 5px solid;
             font-size: 20px;
         }
@@ -111,11 +183,16 @@
         <header class="header">
             <div class="menu-malasngoding">
                 <ul>
-                    <li><a href="/mandiri/index.php">Home</a></li>
-                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
+                     <li class="dropdown"><a href="/mandiri/index.php">Home</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
+                        </ul>
+                    </li>
+
+                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
+                        <ul class="isi-dropdown">
+                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                         </ul>
                     </li>
                                     <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
@@ -127,13 +204,13 @@
 
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
-                                    <li><a href="#">tabel</a></li>
+                                    <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                                 </ul>
                             </li>
                     </li>
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
-                            <li><a href="#">tabel </a></li>
+                        <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                            
                         </ul>
                     </li>
@@ -143,40 +220,64 @@
             </div>
         </header>
     <div class="content">
-        <table>
-            <form action="#" method="GET"></form>
+        <table >
+        <tr>
+<form  method="post">       
+<td> Id Transaksi :<br><br><input type="text" name="id_transaksi" value<?php echo $id_transaksi;?> ></td>
+<td> Id Customer :<br><br>
+<input type="text" name="id1" style="width:320px;height:50px;">
+<button style="height:50px;" name="chekId" >check</button>
+
+<input type="text" name="id2" style="width:250px;height:50px;" value=<?php echo $status; ?>>
+</td>
+</tr>
             <tr>
 
-                <td> Id Transaksi :<br><br><input type="text"></td>
-                <td> Id Customer :<br><br><input type="text"></td>
+                <td> Id mobil :<br><br><select name="id_mobil" style="width:100%;height:50px;font-size:20px;">
+  <?php while($row = mysqli_fetch_assoc($result) ) { 
+      $id=$row['ID_mobil'];   
+      echo "<option style='color:'black'; value='mobil' ".$id."'>".$id."</option>";
+  }
+      ?>  
+</select></td>
+                <td>Id Sopir :<br><br><select style="width:100%;height:50px;font-size:20px;">
+           
+           <?php while($row = mysqli_fetch_assoc($resultSupir) ) { 
+               $id=$row['ID_supir'];   
+               echo "<option style='color:'black'; value='mobil' ".$id."'>".$id."</option>";
+           }
+               ?>  
+         </select></td>
+            </tr>   
+
             </tr>
             <tr>
 
-                <td> Id mobil :<br><br><input type="text"></td>
-                <td>Id Sopir :<br><br><input type="text"></td>
-            </tr>
-
-            </tr>
-            <tr>
-
-                <td>Tanggal sewa :<br><br><input type="text"></td>
-                <td>Lama Sewa:<br><br><input type="text"></td>
+                <td>Tanggal sewa :<br><br><input type="text" name="tanggal_sewa" value=<?php $tgl=date('d-m-Y'); echo $tgl; ?>>
+ </td>
+                <td>Lama Sewa:<br><br><input type="text" name="lama" value=<?php echo $lama ;?>></td>
             </tr>
             <tr>
 
-                <td>Tanggal Kembali:<br><br><input type="text"></td>
-                <td>Uang Muka:<br><br><input type="text"></td>
+                <td>Tanggal Kembali:<br><br><input type="text" name=" tanggal_kembali"value=<?php echo $tglKembali; ?>></td>
+                <td>Sisa Bayar<br><br><input type="text" name="sisaBayar" value=<?php echo $total ;?>></td>
+                
             </tr>
             <tr>
-
-                <td>Sisa Bayar<br><br><input type="text"></td>
-                <td>Kembalian<br><br><input type="text"></td>
+            <td>Bayar:<br><br><input type="text" value=<?php echo $bayar; ?>></td>
+            </tr>
+            <tr>
+            <td>Uang Muka:<br><br><input type="text" name="uangMuka" value=<?php echo  $uangMuka; ?> ></td>
+                <td>Kembalian<br><br><input type="text" name="kembalian" value=<?php echo $kembalian;?> ></td> 
             </tr>
             <tr>
                 <td>
-                    <button type="submit" name="sub">submit
+           
+
+                    <button  name="submit">submit<button style="margin-left:20px;" name="simpan">simpan
                 </td>
             </tr>
+            </form>
         </table>
     </div>
     </body>

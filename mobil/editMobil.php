@@ -32,8 +32,6 @@ if(isset($_POST['update-mobil'])){
      $statusMobil=$_POST['status'];
     
     $query = "UPDATE Kendaraan SET type='$typeMobil' ,merk='$merkMobil',warna='$warnaMobil',tahun='$tahunMobil',harga='$hargaMobil',no_pol='$platMobil',status='$statusMobil' WHERE ID_mobil='$ID'";
-   
-
     $result= mysqli_query($con,$query);
     if(!$result){
         echo "eror";
@@ -149,8 +147,12 @@ button{
         <header class="header">
             <div class="menu-malasngoding">
                 <ul>
-                    <li><a href="/mandiri/index.php">Home</a></li>
-                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
+                     <li class="dropdown"><a href="/mandiri/index.php">Home</a>
+                        <ul class="isi-dropdown">
+                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                           
+                        </ul>
+                    </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
@@ -165,7 +167,7 @@ button{
 
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
-                                    <li><a href="#">tabel</a></li>
+                                    <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                                    
                                 </ul>
                             </li>
@@ -173,7 +175,7 @@ button{
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
                            
-                            <li><a href="#">tabel</a></li>
+                            <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                         </ul>
                     </li>
                 <h1 style="line-height:10px;">Rental Mobil</h1>

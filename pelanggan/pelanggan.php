@@ -133,8 +133,12 @@ button{
         <header class="header">
             <div class="menu-malasngoding">
                 <ul>
-                    <li><a href="/mandiri/index.php">Home</a></li>
-                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
+                     <li class="dropdown"><a href="/mandiri/index.php">Home</a>
+                        <ul class="isi-dropdown">
+                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                           
+                        </ul>
+                    </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
@@ -195,7 +199,7 @@ button{
       <td>Kota :<br><br><input type="text" name="kota"></td>
   </tr>
   <tr>
-      <td> Jenis Kelamin :<br><br><input type="radio" name="jk">Laki-Laki<input type="radio" name="jk">Perempuan</td>
+      <td> Jenis Kelamin :<br><br><input type="radio" name="jk" value="laki-laki">Laki-Laki<input type="radio" name="jk" value="perempuan">Perempuan</td>
 </tr>
         <tr>
             <td>

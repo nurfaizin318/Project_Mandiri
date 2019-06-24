@@ -1,37 +1,49 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "rentalmobil");
-if($con === false){
+@$id=$_GET['id'];
+$link = mysqli_connect("localhost", "root", "", "rentalmobil");
+if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
  
-echo "Connect Successfully. Host info: " . mysqli_get_host_info($con);
+$sql = "SELECT * FROM supir WHERE ID_supir='$id'";
+$result = mysqli_query($link,$sql)or die(mysqli_error($sql));
 
-$sql = "SELECT * FROM customer";
-$result = mysqli_query($con,$sql)or die(mysqli_error());
+while($row = mysqli_fetch_assoc($result) ) { 
+    $IDsupir=$row['ID_supir'];
+    $nama=$row['nama'];
+    $no_sim=$row['no_sim'];
+    $no_hp=$row['no_hp'];
+    $alamat=$row['alamat'];
+    $status=$row['status'];
 
-if (isset($_POST['edit'])) {
-    $ID = $_POST['edit'];
-    $update = true;
-    $n = mysqli_fetch_array($record);
-    $IDmobil = $n['ID_customer'];
-    $merek = $n['nama'];
-    $warna = $n['no_ktp'];
-    $tahun = $n['jenis_kelamin'];
-    $harga = $n['no_hp'];
-    $platNomor = $n['alamat'];
-    $status=$n['kota'];
-
-   
+ 
 }
 
+if(isset($_POST['sub'])){
 
+    $id=$_POST['id'];
+    $nama=$_POST['nama'];
+    $no_sim=$_POST['no_sim'];
+    $no_hp=$_POST['noHp'];
+    $alamat=$_POST['alamat'];
+    $status=$_POST['status'];
+    $query = "UPDATE supir SET  nama='$nama',no_sim='$no_sim',no_hp='$no_hp',alamat='$alamat',status='$status' WHERE ID_supir='$id'";
+    $result= mysqli_query($link,$query);
+
+    if(!$result){
+        echo "eror";
+    }
+    if($query)
+            header('Location: /mandiri/sopir/tabel-sopir.php');
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
+    <style>
     body{
-    background-color: white;
+    background: white;
 }
 .menu-malasngoding {
             background-color: white;
@@ -96,80 +108,36 @@ if (isset($_POST['edit'])) {
             color: #232323 !important;
             background: #f3f3f3 !important;
         }
-        table {  
-    color: #333;
-    font-family: Helvetica, Arial, sans-serif;
-    width: 640px; 
-    border-collapse: 
-    collapse; border-spacing: 0; 
-}
-
-td, th {  
-    border: 1px solid transparent; /* No more visible border */
-    height: 70px; 
-    transition: all 0.3s;
-    text-align:center;
-
-}
-
-th {  
-    background: #DFDFDF;  /* Darken header a bit */
-    font-weight: bold;
-    font-size:30;
-}
-
-td {  
-    background: #FAFAFA;
-    text-align: center;
-
-}
-table{
-    width:90%;
-}
-.content{
-    margin:auto;
-    margin-top:15px;
-}
 .content table{
-    margin:auto;
-}
-tr td{
-    height:60px;
-}
-#btnEdit{
-    background:#2196F3;
-    color:white;
-    width:100px;
-    height:40px;
-    border:none;
-    margin:auto;
-    border-radius: 7px;
-    font-size: 18px;
+    width:1000px;
+    margin: auto;
+    font-size: 20px;
     
 }
-#btnHapus{
-    background:#FF5722;
-    color:white;
-    width:100px;
-    height:40px;
-    border:none;
-    border-radius: 7px;
-    font-size: 18px;
+td input[type='text']{
+    width: 100%;
+    height:70%;
+    border-radius: 5px solid;
+    font-size: 20px;
 }
-
-/* Cells in even rows (2,4,6...) are one color */        
-tr:nth-child(even) td { background: #F1F1F1; }   
-
-/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */        
-tr:nth-child(odd) td { background: #FEFEFE; }  
-
-tr td:hover { background: #666; color: #FFF; }  
-/* Hover cell effect! */
-</style>
+td{
+    height: 50px;
+    padding: 20px;
+}
+button{
+    background-color: #4CAF50;
+    border:none;
+    color:white;
+    padding: 15px 32px;
+    text-align:center;
+    font-size: 17px;
+}
+    </style>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tabel</title>
+    <title>Document</title>
 </head>
 <body>
 <div class="head">
@@ -203,6 +171,7 @@ tr td:hover { background: #666; color: #FFF; }
                     </li>
                     <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
                         <ul class="isi-dropdown">
+                           
                             <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                         </ul>
                     </li>
@@ -211,50 +180,43 @@ tr td:hover { background: #666; color: #FFF; }
                 </ul>
             </div>
         </header>
-  <div class="content">
-  <table>
-  <th>ID Penyewa </th>
-  <th>namespace </th>
-  <th>no Ktp </th>
-  <th>Jenis Kelamin </th>
-  <th>No HP  </th>
-  <th>Alamat</th>
-  <th>Kota</th>
-  <th>pilihan</th>
-  
+    <h1 style="margin-left:50%;color: #78909C">Supir</h1>
+    <div class="content">
+       <table >
+        <form action="#" method="post">
+        <tr>
+            
+            <td> Id Supir :<br><br><input type="text" name="id" value=<?php  echo $IDsupir ?> ></td>
+        </tr>
+        <tr>
+            
+            <td> Nama :<br><br><input type="text" name="nama" value=<?php  echo $nama ?>></td>
+        </tr>
+        <tr>
+            
+            <td> No SIM :<br><br><input type="text" name="no_sim" value=<?php  echo $no_sim ?>></td>
+        </tr>
+        <tr>
+          
+            <td>No Telepon :<br><br><input type="text" name="noHp" value=<?php  echo $no_hp ?>></td>
+        </tr>
+    </tr>
+</tr><tr>
+    
+    <td>Alamat :<br><br><input type="text"name="alamat" value=<?php  echo $alamat ?>></td>
+</tr>
+    <tr>
+      
+        <td>Status :<br><br><input type="text" name="status" value=<?php  echo $status ?>></td>
+    </tr>
  
-  <?php while($row = mysqli_fetch_assoc($result) ) { 
-      $id=$row['ID_customer'];
-      $nama=$row['nama'];
-      $no_ktp=$row['no_ktp'];
-      $jenis_kelamin=$row['jenis_kelamin'];
-      $no_hp=$row['no_hp'];
-      $alamat=$row['alamat'];
-      $kota=$row['kota'];      
-      ?>
-   
-    <tr>  
-  <td><?php echo $id; ?></td>
-  <td><?php echo $nama; ?></td>
-  <td><?php echo $no_ktp; ?></td>
-  <td><?php echo $jenis_kelamin; ?></td>
-  <td><?php echo $no_hp ?></td>
-  <td><?php echo $alamat; ?></td>
-  <td><?php echo $kota; ?></td>
-  <td><?php echo "<a href='/mandiri/pelanggan/edit-pelanggan.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href='/mandiri/mobil/tabelMobil.php'><form action='/mandiri/pelanggan/tabel-pelanggan.php?id=".$id."' method='post'> <button name='hapus' id='btnHapus'>hapus</button></form></a>" 
-  ?></td>
-  </tr>
-  <?php 
-} 
-if(isset($_POST['hapus'])){
-    @$idplg=$_GET['id'];
-        $query="DELETE FROM customer WHERE ID_customer='$idplg'";
-        $result=mysqli_query($con,$query);
-        if(!$result){
-            echo "eror";
-        }
-     } ?>
-  </div>
- 
+        <tr>
+            <td>
+    <button type="submit" name="sub">update
+            </td>
+        </tr>
+        </form>
+       </table>
+    </div>
 </body>
-</html>
+</html>s
