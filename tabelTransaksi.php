@@ -1,28 +1,43 @@
 <?php
+
 $con = mysqli_connect("localhost", "root", "", "rentalmobil");
 if($con === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
  
 echo "Connect Successfully. Host info: " . mysqli_get_host_info($con);
+$sql = "SELECT * FROM transaksi";
 
-$sql = "SELECT * FROM supir";
+
 $result = mysqli_query($con,$sql)or die(mysqli_error());
+
+
 
 if (isset($_POST['edit'])) {
     $ID = $_POST['edit'];
-    $n = mysqli_fetch_array($record);
-    $IDsupir = $n['supir'];
-    $merek = $n['nama'];
-    $warna = $n['no_ktp'];
-    $tahun = $n['jenis_kelamin'];
-    $harga = $n['no_hp'];
-    $platNomor = $n['alamat'];
-    $status=$n['kota'];
+    $update = true;
+    $record = mysqli_query($con, "SELECT * FROM kendaraan ");
 
-   
+  
+        $n = mysqli_fetch_array($record);
+        $IDmobil = $n['ID_mobil'];
+        $merek = $n['merk'];
+        $warna = $n['warna'];
+        $tahun = $n['tahun'];
+        $harga = $n['harga'];
+        $platNomor = $n['no_pol'];
+        $status=$n['status'];
 }
+if(isset($_POST['hapus'])){
+    @$id=$_GET['id'];
 
+        $query="DELETE FROM transaksi WHERE ID_transaksi='$id'";
+        $result=mysqli_query($con,$query);
+        if(!$result){
+            echo "eror";
+        }
+       
+     }
 
 ?>
 <!DOCTYPE html>
@@ -158,7 +173,6 @@ tr td{
 
 /* Cells in even rows (2,4,6...) are one color */        
 tr:nth-child(even) td { background: #F1F1F1; }   
-
 /* Cells in odd rows (1,3,5...) are another (excludes header cells)  */        
 tr:nth-child(odd) td { background: #FEFEFE; }  
 
@@ -177,22 +191,21 @@ tr td:hover { background: #666; color: #FFF; }
                 <ul>
                      <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
-                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                            <li><a href="/mandiri/tabelTransaksi.php">tabel</a></li>
                            
                         </ul>
-                    </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
+                    </li>       <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
                         </ul>
                     </li>
-                                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
+                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
                         <ul class="isi-dropdown">
-                            <li><a href="/mandiri/pelanggan/tabel-pelanggan.php">tabel</a></li>
+                            <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
                            
                         </ul>
-                    </li> 
-
+                    </li>
                     <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
                                 <ul class="isi-dropdown">
                                     <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
@@ -212,39 +225,55 @@ tr td:hover { background: #666; color: #FFF; }
         </header>
   <div class="content">
   <table>
+  <th>ID Transaksi </th>
+  <th>ID mobil </th>
+  <th>ID Customer </th>
   <th>ID Supir </th>
-  <th>nama </th>
-  <th>no sim </th>
-  <th>no hp </th>
-  <th>Alamat</th>
-  <th>status</th>
+  <th>tanggal sewa  </th>
+  <th>lama sewa </th>
+  <th>tsnggal kembali</th>
+  <th>bayar </th>
+  <th>uang muka</th>
+  <th>sisa bayar</th>
+  <th>kembalian</th>
   <th>pilihan</th>
-  
- 
   <?php while($row = mysqli_fetch_assoc($result) ) { 
-      $id=$row['ID_supir'];
-      $nama=$row['nama'];
-      $no_sim=$row['no_sim'];
-      $no_hp=$row['no_hp'];
-      $alamat=$row['alamat'];
-      $status=$row['status'];      
+      $ID_transaksi=$row['ID_transaksi'];
+      $ID_customer=$row['ID_customer'];
+      $ID_mobil=$row['ID_mobil'];
+      $ID_supir=$row['ID_supir'];
+      $tanggal_sewa=$row['tanggal_sewa'];
+      $lama_sewa=$row['lama_sewa'];
+      $tanggal_kembali=$row['tanggal_kembali'];
+      $bayar=$row['bayar'];
+      $uang_muka=$row['uang_muka'];
+      $sisa_bayar=$row['sisa_bayar'];
+      $kembalian=$row['kembalian'];
+      
       ?>
    
     <tr>  
-  <td><?php echo $id; ?></td>
-  <td><?php echo $nama; ?></td>
-  <td><?php echo $no_sim; ?></td>
-  <td><?php echo $no_hp ?></td>
-  <td><?php echo $alamat; ?></td>
-  <td><?php echo $status; ?></td>
-  <td><?php echo "<a href='/mandiri/sopir/edit-supir.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href='/mandiri/sopir/tabel-sopir.php'><form action='/mandiri/sopir/tabel-sopir.php?id=".$id."' method='post'> <button name='hapus' id='btnHapus'>hapus</button></form></a>" 
+  <td><?php echo $ID_transaksi; ?></td>
+  <td><?php echo $ID_mobil; ?></td>
+  <td><?php echo $ID_customer; ?></td>
+  <td><?php echo $ID_supir; ?></td>
+  <td><?php echo $tanggal_sewa ?></td>
+  <td><?php echo $lama_sewa; ?></td>
+  <td><?php echo $tanggal_kembali; ?></td>
+  <td><?php echo $bayar; ?></td>
+  <td><?php echo $uang_muka; ?></td>
+  <td><?php echo $sisa_bayar; ?></td>
+  <td><?php echo $kembalian; ?></td>
+  <td><?php echo "<a href='/mandiri/mobil/editMobil.php?'><button name='edit' id='btnEdit'>edit</button></a><a href=''><form action='/mandiri/tabelTransaksi.php?id=".$ID_transaksi."' method='post'> <button name='hapus' id='btnHapus'>hapus</button></form>";
   ?></td>
   </tr>
   <?php 
 } 
 if(isset($_POST['hapus'])){
-    @$id=$_GET['id'];
-        $query="DELETE FROM supir WHERE ID_supir='$id'";
+    @$idMob=$_GET['id'];
+        
+    
+        $query="DELETE FROM kendaraan WHERE ID_mobil='$idMob'";
         $result=mysqli_query($con,$query);
         if(!$result){
             echo "eror";

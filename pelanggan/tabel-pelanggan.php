@@ -176,7 +176,7 @@ tr td:hover { background: #666; color: #FFF; }
         <header class="header">
             <div class="menu-malasngoding">
                 <ul>
-                     <li class="dropdown"><a href="/mandiri/index.php">Home</a>
+                     <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
@@ -241,7 +241,7 @@ tr td:hover { background: #666; color: #FFF; }
   <td><?php echo $no_hp ?></td>
   <td><?php echo $alamat; ?></td>
   <td><?php echo $kota; ?></td>
-  <td><?php echo "<a href='/mandiri/pelanggan/edit-pelanggan.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href='/mandiri/mobil/tabelMobil.php'><form action='/mandiri/pelanggan/tabel-pelanggan.php?id=".$id."' method='post'> <button name='hapus' id='btnHapus'>hapus</button></form></a>" 
+  <td><?php echo "<a href='/mandiri/pelanggan/edit-pelanggan.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href='/mandiri/mobil/tabelMobil.php'><form action='/mandiri/pelanggan/tabel-pelanggan.php?id=".$id."' method='post'> <a href=''><button name='hapus' id='btnHapus'>hapus</button></a></form>" 
   ?></td>
   </tr>
   <?php 

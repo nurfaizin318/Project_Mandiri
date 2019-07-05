@@ -179,7 +179,7 @@ tr td:hover { background: #666; color: #FFF; }
         <header class="header">
             <div class="menu-malasngoding">
                 <ul>
-                     <li class="dropdown"><a href="/mandiri/index.php">Home</a>
+                     <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
@@ -245,21 +245,18 @@ tr td:hover { background: #666; color: #FFF; }
   <td><?php echo $harga; ?></td>
   <td><?php echo $plat; ?></td>
   <td><?php echo $status; ?></td>
-  <td><?php echo "<a href='/mandiri/mobil/editMobil.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href='/mandiri/mobil/tabelMobil.php'><form action='/mandiri/mobil/tabelMobil.php?id=".$id."' method='post'> <button name='hapus' id='btnHapus'>hapus</button></form></a>" 
+  <td><?php echo "<a href='/mandiri/mobil/editMobil.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href=''><form action='/mandiri/mobil/tabelMobil.php?id=".$id."' method='post'> <button name='hapus' id='btnHapus'>hapus</button></form></a>" 
   ?></td>
   </tr>
   <?php 
 } 
 if(isset($_POST['hapus'])){
     @$idMob=$_GET['id'];
-        
-    
         $query="DELETE FROM kendaraan WHERE ID_mobil='$idMob'";
         $result=mysqli_query($con,$query);
         if(!$result){
             echo "eror";
         }
-      
        
      } ?>
   </div>

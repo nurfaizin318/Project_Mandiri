@@ -81,7 +81,7 @@
         <header class="header">
             <div class="menu-malasngoding">
                 <ul>
-                     <li class="dropdown"><a href="/mandiri/index.php">Home</a>
+                     <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
                             <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
                            
