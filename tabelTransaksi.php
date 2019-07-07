@@ -36,6 +36,9 @@ if(isset($_POST['hapus'])){
         if(!$result){
             echo "eror";
         }
+if($query){
+    header("Location:/mandiri/tabelTransaksi.php");
+}
        
      }
 
@@ -191,7 +194,7 @@ tr td:hover { background: #666; color: #FFF; }
                 <ul>
                      <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
-                            <li><a href="/mandiri/tabelTransaksi.php">tabel</a></li>
+                        <li><a href="/mandiri/tabelTransaksi.php">tabel</a></li>
                            
                         </ul>
                     </li>       <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
@@ -249,9 +252,7 @@ tr td:hover { background: #666; color: #FFF; }
       $uang_muka=$row['uang_muka'];
       $sisa_bayar=$row['sisa_bayar'];
       $kembalian=$row['kembalian'];
-      
       ?>
-   
     <tr>  
   <td><?php echo $ID_transaksi; ?></td>
   <td><?php echo $ID_mobil; ?></td>

@@ -20,6 +20,8 @@ if(isset($_POST['submite'])){
     if(!$result)
     {
     echo "data not inserted";
+    }else{
+        header("Location:/mandiri/pelanggan/tabel-pelanggan.php?");
     }
 
     mysqli_close($link);
@@ -135,7 +137,7 @@ button{
                 <ul>
                      <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
-                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                        <li><a href="/mandiri/tabelTransaksi.php">tabel</a></li>
                            
                         </ul>
                     </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>

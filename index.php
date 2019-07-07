@@ -5,7 +5,7 @@ $con = mysqli_connect("localhost", "root", "", "rentalmobil");
 @$id=$_GET['id'];
 $status="";
 $sewa=600000;
-$tglKembali=null;
+$tglKembali=0;
 $lamaSewa="";
 $lama='';
 $bayar=null;
@@ -25,20 +25,7 @@ if(isset($_POST['lama_sewa'])){
     $bayar = $sewa*$lama;
     $tglKembali= date('d-m-Y', strtotime("+$lama days"));
 }
-if(isset($_SESSION['pos'])):
-        $id_tran  =$_SESSION['pos']['id_transaksi'];
-        $lamaSwa=$_SESSION['pos']['lama'];
-        $kemb	=$_SESSION['pos']['kembalian']; 
-        $tglKembali=$_SESSION['pos']['tanggal_kembali'];
-        $bayar_ses=$_SESSION['pos']['bayar'];
-else:
-    $id_tran=0;
-    $lamaSwa=0;
-    $kemb=0;
-    $kemb=0;
-    $tgl_kemb=null;
-    $bayar_ses=0;
-    endif; 
+
 echo "Connect Successfully. Host info: " . mysqli_get_host_info($con);
 $sql = "SELECT * FROM kendaraan";
 $result = mysqli_query($con,$sql)or die(mysqli_error());
@@ -51,18 +38,31 @@ $resultSupir=mysqli_query($con,$querySupir)or die(mysqli_error());
     $id_transaksi=$_POST['id_transaksi'];
     $uangMuka=$_POST['uangMuka'];
     $lama=$_POST['lama'];
-    $tanggal_kembali=$_POST['tanggal_kembali'];
+    $tglKembali=$_POST['tanggal_kembali'];
 
     if($uangMuka < $bayar){
         $sub_total =abs($bayar-$uangMuka);
         $kembalian=0;
-
     }
     else{
         $kembalian=abs($uangMuka-$bayar);
 
     }
 }
+
+if(isset($_SESSION['pos'])):
+    $id_tran  =$_SESSION['pos']['id_transaksi'];
+    $lamaSwa=$_SESSION['pos']['lama'];
+    $kemb	=$_SESSION['pos']['kembalian']; 
+    $bayar_ses=$_SESSION['pos']['bayar'];
+else:
+$id_tran=0;
+$lamaSwa=0;
+$kemb=0;
+$kemb=0;
+$tgl_kemb=null;
+$bayar_ses=0;
+endif; 
 if(isset($_POST['simpan'])){
     $id_transaksi=$_POST['id_transaksi'];
     $id_mobil=$_POST['id_mobil'];
@@ -92,8 +92,14 @@ VALUES ('$id_transaksi',$id,'$id_mobil','$id_supir','$tanggal_sewa','$lama_sewa'
 ";
     $result = mysqli_query($con,$query);
     mysqli_close($con);
-}
 
+    if(!$result){
+        echo "data not Inserted";
+    }
+    else{
+        
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -212,7 +218,7 @@ VALUES ('$id_transaksi',$id,'$id_mobil','$id_supir','$tanggal_sewa','$lama_sewa'
                     <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
                         <li><a href="/mandiri/cari.php">cari</a></li>
-                        <li><a href="">tabel</a></li>
+                        <li><a href="/mandiri/tabelTransaksi.php">tabel</a></li>
 
                         </ul>
                     </li>
@@ -248,11 +254,11 @@ VALUES ('$id_transaksi',$id,'$id_mobil','$id_supir','$tanggal_sewa','$lama_sewa'
             </div>
         </header>
         <div class="content">
-            <table>
+            <table style="width:70%">
                 <tr>
                     <form method="post">
                         <td> Id Transaksi :<br><br><input type="text" name="id_transaksi"
-                                value=<?php echo $id_tran;?> ></td>
+                                value=<?php echo $id;?> ></td>
 
                         <td> Id mobil :<br><br><select name="id_mobil" style="width:100%;height:50px;font-size:20px;">
                                 <?php while($row = mysqli_fetch_assoc($result) ) { 
@@ -262,7 +268,7 @@ VALUES ('$id_transaksi',$id,'$id_mobil','$id_supir','$tanggal_sewa','$lama_sewa'
       ?> 
                 <tr>
                     </select></td>
-                    <td>Id Sopir :<br><br><select  name="id_supir" style="width:100%;height:50px;font-size:20px;">
+                    <td>Id Sopir :<br><br><select  name="id_supir" style="width:75%;height:50px;font-size:20px;">
 
                             <?php while($row = mysqli_fetch_assoc($resultSupir) ) { 
                $id=$row['ID_supir'];   

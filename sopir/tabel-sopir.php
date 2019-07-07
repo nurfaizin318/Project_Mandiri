@@ -22,7 +22,17 @@ if (isset($_POST['edit'])) {
 
    
 }
-
+if(isset($_POST['hapus'])){
+    @$id=$_GET['id'];
+        $query="DELETE FROM supir WHERE ID_supir='$id'";
+        $result=mysqli_query($con,$query);
+        if(!$result){
+            echo "eror";
+        }
+        if($query){
+            header("Location:/mandiri/sopir/tabel-sopir.php");
+        }
+     }
 
 ?>
 <!DOCTYPE html>
@@ -177,8 +187,7 @@ tr td:hover { background: #666; color: #FFF; }
                 <ul>
                      <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
-                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
-                           
+                        <li><a href="/mandiri/tabelTransaksi.php">tabel</a></li>
                         </ul>
                     </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
                         <ul class="isi-dropdown">
@@ -242,14 +251,7 @@ tr td:hover { background: #666; color: #FFF; }
   </tr>
   <?php 
 } 
-if(isset($_POST['hapus'])){
-    @$id=$_GET['id'];
-        $query="DELETE FROM supir WHERE ID_supir='$id'";
-        $result=mysqli_query($con,$query);
-        if(!$result){
-            echo "eror";
-        }
-     } ?>
+ ?>
   </div>
  
 </body>

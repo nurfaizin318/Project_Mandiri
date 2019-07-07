@@ -22,6 +22,9 @@ if(isset($_POST['submit'])){
     {
     echo "data not inserted";
     }
+    else {
+        header("Location:/mandiri/mobil/tabelMobil.php?id='$id'");
+    }
 
     mysqli_close($link);
 }
@@ -141,7 +144,7 @@ button{
                 <ul>
                      <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
-                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                        <li><a href="/mandiri/tabelTransaksi.php">tabel</a></li>
                            
                         </ul>
                     </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>

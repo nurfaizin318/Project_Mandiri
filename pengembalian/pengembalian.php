@@ -69,6 +69,26 @@
             color: #232323 !important;
             background: #f3f3f3 !important;
         }
+        td input[type='text'] {
+            width: 700px;
+            height: 50px;
+            border-radius: 5px solid;
+            font-size: 20px;
+        }
+
+        td {
+            height: 50px;
+            padding: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 17px;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -77,46 +97,54 @@
     <title>Document</title>
 </head>
 <body>
-<div class="head">
-        <header class="header">
-            <div class="menu-malasngoding">
-                <ul>
-                     <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
-                        <ul class="isi-dropdown">
-                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
-                           
-                        </ul>
-                    </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
-                        <ul class="isi-dropdown">
-                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
-                           
-                        </ul>
-                    </li>
-                                    <li class="dropdown"><a href="/mandiri/pelanggan/pelanggan.php">penyewa</a>
-                        <ul class="isi-dropdown">
-                            <li><a href="/mandiri/pelanggan/tabel-pelanggan.php">tabel</a></li>
-                           
-                        </ul>
-                    </li> 
+<table style="width:70%">
+                <tr>
+                    <form method="post">
+                        <td> Id Transaksi :<br><br><input type="text" name="id_transaksi"
+                                 ></td>
+                                 <td> Id Customer :<br><br><input name="id_mobil" style="width:100%;height:50px;font-size:20px;"></td>
+                      
+    </tr>   
+    <tr>
+        <td> Id mobil :<br><br><input name="id_mobil" style="width:100%;height:50px;font-size:20px;"></td>
+    </tr>
+                <tr>
+                    
+                    <td>Id Sopir :<br><br><input name="id_supir" style="width:75%;height:50px;font-size:20px;">
 
-                    <li class="dropdown"><a href="/mandiri/pengembalian/pengembalian.php">pengembalian</a>
-                                <ul class="isi-dropdown">
-                                    <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
-                                   
-                                </ul>
-                            </li>
-                    </li>
-                    <li class="dropdown"><a href="/mandiri/sopir/sopir.php">sopir</a>
-                        <ul class="isi-dropdown">
-                           
-                            <li><a href="/mandiri/sopir/tabel-sopir.php">tabel</a></li>
-                        </ul>
-                    </li>
-                <h1 style="line-height:10px;">Rental Mobil</h1>
-    
-                </ul>
-            </div>
-        </header>
-  <h1 style="margin-left:50%;color: #78909C">Pengembalian</h1>
+                    </td>
+                    <td>Tanggal sewa :<br><br><input type="text" name="tanggal_sewa"
+                            >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lama Sewa:<br><br><input style="width:600px" type="text" name="lama"
+                            ></td>
+
+                    <td>Tanggal Kembali:<br><br><input type="text" name=" tanggal_kembali"
+                             >
+                </tr>
+                <tr>
+                    </td>
+                    <td>Bayar:<br><br><input type="text" name="bayar" ></td>
+
+                    <td>Uang Muka:<br><br><input type="text" name="uangMuka" ></td>
+
+                </tr>
+                <tr>
+                </tr>
+                <tr>
+                <td>Sisa Bayar<br><br><input type="text" name="sisaBayar" ></td>
+                    <td>Kembalian<br><br><input type="text" name="kembalian" ></td>
+                </tr>
+                <tr>
+                    <td>
+
+
+                        <button name="submit">submit</button>
+                    </td>
+                </tr>
+                </form>
+            </table>
 </body>
 </html>

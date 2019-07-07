@@ -4,7 +4,6 @@ if($con === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
  
-echo "Connect Successfully. Host info: " . mysqli_get_host_info($con);
 
 $sql = "SELECT * FROM kendaraan";
 
@@ -28,6 +27,19 @@ if (isset($_POST['edit'])) {
         $platNomor = $n['no_pol'];
         $status=$n['status'];
 }
+if(isset($_POST['hapus'])){
+    @$idMob=$_GET['id'];
+        $query="DELETE FROM kendaraan WHERE ID_mobil='$idMob'";
+        $result=mysqli_query($con,$query);
+       
+        if(!$result){
+            echo "eror";
+        }
+        if($query){
+            header("Location:/mandiri/mobil/tabelMobil.php");
+        }
+     }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -181,7 +193,7 @@ tr td:hover { background: #666; color: #FFF; }
                 <ul>
                      <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
-                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                            <li><a href="/mandiri/tabelTransaksi.php">tabel</a></li>
                            
                         </ul>
                     </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
@@ -245,21 +257,19 @@ tr td:hover { background: #666; color: #FFF; }
   <td><?php echo $harga; ?></td>
   <td><?php echo $plat; ?></td>
   <td><?php echo $status; ?></td>
-  <td><?php echo "<a href='/mandiri/mobil/editMobil.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href=''><form action='/mandiri/mobil/tabelMobil.php?id=".$id."' method='post'> <button name='hapus' id='btnHapus'>hapus</button></form></a>" 
+  <td><?php echo "<a href='/mandiri/mobil/editMobil.php?id=".$id."'><button name='edit' id='btnEdit'>edit</button></a><a href=''><form action='/mandiri/mobil/tabelMobil.php?id=".$id."' method='post'> <button name='hapus' id='btnHapus' >hapus</button></form></a>" 
   ?></td>
   </tr>
   <?php 
 } 
-if(isset($_POST['hapus'])){
-    @$idMob=$_GET['id'];
-        $query="DELETE FROM kendaraan WHERE ID_mobil='$idMob'";
-        $result=mysqli_query($con,$query);
-        if(!$result){
-            echo "eror";
-        }
-       
-     } ?>
+ ?>
   </div>
  
 </body>
+<!-- <script>
+var x = document.getElementById('btnHapus');
+x.onclick=()=>{
+    location.reload(true)
+}
+</script> -->
 </html>

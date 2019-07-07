@@ -79,6 +79,7 @@ if(isset($_POST['submit'])){
     <a href="mandiri"></a>
     <a href="/mandiri/tabelTransaksi.php">Home</a>
         <div class="form">
+            
             <form  method="post" action="">
                 <input type="text" name="ktp" placeholder="masukkan nomer ktp">
                 <button name="submit">search</button>

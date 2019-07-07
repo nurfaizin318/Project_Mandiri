@@ -21,10 +21,18 @@ if (isset($_POST['edit'])) {
     $platNomor = $n['alamat'];
     $status=$n['kota'];
 
-   
 }
-
-
+if(isset($_POST['hapus'])){
+    @$idplg=$_GET['id'];
+        $query="DELETE FROM customer WHERE ID_customer='$idplg'";
+        $result=mysqli_query($con,$query);
+        if(!$result){
+            echo "eror";
+        }
+        if($query){
+            header("Location:/mandiri/pelanggan/tabel-pelanggan.php");
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -178,7 +186,7 @@ tr td:hover { background: #666; color: #FFF; }
                 <ul>
                      <li class="dropdown"><a href="/mandiri/cari.php">Insert</a>
                         <ul class="isi-dropdown">
-                            <li><a href="/mandiri/mobil/tabelMobil.php">tabel</a></li>
+                        <li><a href="/mandiri/tabelTransaksi.php">tabel</a></li>
                            
                         </ul>
                     </li>                    <li class="dropdown"><a href="/mandiri/mobil/mo-bil.php">mobil</a>
@@ -246,14 +254,8 @@ tr td:hover { background: #666; color: #FFF; }
   </tr>
   <?php 
 } 
-if(isset($_POST['hapus'])){
-    @$idplg=$_GET['id'];
-        $query="DELETE FROM customer WHERE ID_customer='$idplg'";
-        $result=mysqli_query($con,$query);
-        if(!$result){
-            echo "eror";
-        }
-     } ?>
+
+      ?>
   </div>
  
 </body>
